@@ -1,9 +1,8 @@
 # Importing the requirements
+from src.minicpm.response import describe_image
+import gradio as gr
 import warnings
 warnings.filterwarnings("ignore")
-
-import gradio as gr
-from src.minicpm.response import describe_image
 
 
 # Image, text query, and input parameters
@@ -14,10 +13,12 @@ temperature = gr.Slider(
 )
 top_p = gr.Slider(minimum=0, maximum=1, step=0.01, value=0.8, label="Top P")
 top_k = gr.Slider(minimum=0, maximum=1000, step=1, value=100, label="Top K")
-max_new_tokens = gr.Slider(minimum=1, maximum=4096, step=1, value=512, label="Max Tokens")
+max_new_tokens = gr.Slider(minimum=1, maximum=4096,
+                           step=1, value=512, label="Max Tokens")
 
 # Output for the interface
-answer = gr.Textbox(label="Predicted answer", show_label=True, show_copy_button=True)
+answer = gr.Textbox(label="Predicted answer",
+                    show_label=True, show_copy_button=True)
 
 # Examples for the interface
 examples = [
@@ -31,7 +32,7 @@ examples = [
     ],
     [
         "images/dog.jpg",
-        "¿De qué color es el perro?",
+        "What is the color of the dog?",
         0.7,
         0.8,
         100,
@@ -39,7 +40,7 @@ examples = [
     ],
     [
         "images/bird.jpg",
-        "Que fait l'oiseau ?",
+        "What does the bird do?",
         0.7,
         0.8,
         100,
@@ -48,9 +49,8 @@ examples = [
 ]
 
 # Title, description, and article for the interface
-title = "Visual Question Answering"
-description = "Gradio Demo for the MiniCPM-o 2.6: A GPT-4o Level MLLM for Vision, Speech and Multimodal Live Streaming. This model can answer questions about images in natural language. To use it, upload your image, type a question, select associated parameters, use the default values, click 'Submit', or click one of the examples to load them. You can read more at the links below."
-article = "<p style='text-align: center'><a href='https://github.com/OpenBMB/MiniCPM-o' target='_blank'>Model GitHub Repo</a> | <a href='https://huggingface.co/openbmb/MiniCPM-o-2_6' target='_blank'>Model Page</a></p>"
+title = "Prismlab Demo"
+description = "A GPT-4o Level MLLM for Vision, Speech and Multimodal Live Streaming. This model can answer questions about images in natural language. To use it, upload your image, type a question, select associated parameters, use the default values, click 'Submit', or click one of the examples to load them. You can read more at the links below."
 
 
 # Launch the interface
@@ -63,7 +63,6 @@ interface = gr.Interface(
     cache_mode="lazy",
     title=title,
     description=description,
-    article=article,
     theme="Glass",
     flagging_mode="never",
 )
